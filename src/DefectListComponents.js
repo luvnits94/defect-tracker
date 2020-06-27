@@ -17,7 +17,9 @@ function DefectDetailsComponent(){
         var defects = [
             { id:101,category: "UI", description: 'Submit Button coming to the extreme left.Refer the screenshots ', priority: 2, status:"open", changeStatus:"CloseDefect"},
             { id:102,category: "Functional", description: 'While submitting the form data. a confirmation popup should appear. Refer the SRS document.', priority:1, status:"open", changeStatus:"CloseDefect"},
-            { id:103,category: "ChangeRequest", description: 'Add remove user functionality',priority:3, status:"closed", changeStatus:"No Action Pending"}
+            { id:103,category: "ChangeRequest", description: 'Add remove user functionality',priority:3, status:"closed", changeStatus:"No Action Pending"},
+            { id:104,category: "ChangeRequest", description: 'Add remove user functionality',priority:3, status:"closed", changeStatus:"No Action Pending"},
+            { id:105,category: "ChangeRequest", description: 'Add remove user functionality',priority:3, status:"closed", changeStatus:"No Action Pending"}
           ]
         return(
             <>
@@ -35,15 +37,11 @@ function DefectDetailsComponent(){
                     </thead>
                     <tbody>
                     {defects.map(defect => {
-                                       return(  <tr key={defect.id}>
-                                                <td>{defect.category}</td>
-                                                <td>{defect.description}</td>
-                                                <td>{defect.priority}</td>
-                                                <td>{defect.status}</td>
-                                                <td><a href="#">{defect.changeStatus}</a></td>
-                                        </tr>) 
-                                }) 
-                                }
+                        return(  
+                            <Defect id={defect.id} description={defect.description} category={defect.category} priority={defect.priority} status={defect.status} changeStatus={defect.changeStatus}/>
+                        )
+                    })}
+                        
                     </tbody>
                 </table>
             </>
@@ -170,6 +168,23 @@ class DefectFilterComponent extends React.Component{
         )
     }
 }
+
+class Defect extends React.Component{
+    render(){
+        return(
+            <>
+                <tr key={this.props.id}>
+                    <td>{this.props.category}</td>
+                    <td>{this.props.description}</td>
+                    <td>{this.props.priority}</td>
+                    <td>{this.props.status}</td>
+                    <td><a href="#">{this.props.changeStatus}</a></td>
+                </tr>
+            </>
+        )
+    }
+}
+
 
 
 export default DefectListComponent;
