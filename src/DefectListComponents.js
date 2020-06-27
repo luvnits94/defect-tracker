@@ -21,6 +21,8 @@ function DefectDetailsComponent(){
           ]
         return(
             <>
+                <h1 style={{textAlign:'center'}}>Defect Details</h1>
+                <h3 style={{textAlign:'center'}}>Search Results: {defects.length}</h3>
                 <table style={{tableLayout:'auto'}} id="defect-details-table">
                     <thead>
                         <tr>

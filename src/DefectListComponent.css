@@ -12,8 +12,11 @@ td{
   background-color: #EEEEEE;
 }
 
-table{
+table#defect-details-table{
   padding: 50px;
+  width:70%; 
+  margin-left:15%; 
+  margin-right:15%;
 }
 
 /* Navbar */
