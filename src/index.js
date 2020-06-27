@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import DefectListComponent from './DefectListComponents';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <DefectListComponent />
   </React.StrictMode>,
   document.getElementById('root')
 );
