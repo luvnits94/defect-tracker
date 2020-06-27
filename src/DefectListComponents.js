@@ -21,7 +21,7 @@ function DefectDetailsComponent(){
           ]
         return(
             <>
-                <table style={{tableLayout:'auto'}}>
+                <table style={{tableLayout:'auto'}} id="defect-details-table">
                     <thead>
                         <tr>
                             <th>Defect Category</th>
@@ -47,8 +47,6 @@ function DefectDetailsComponent(){
             </>
         )
 }
-
-
 
 function DefectTrackerNavBarComponent (){
     return(
@@ -82,63 +80,88 @@ function DefectTrackerNavBarComponent (){
 class DefectFilterComponent extends React.Component{
     state={category:"All", priorty:"All"}
     // To Do -- implement filter functionality
-    // filterTableHandler=(filterType)=>{
+    filterTableHandler=(filterType)=>{
+
         // Declare variables
-    // var input, filter, table, tr, td, i, txtValue;
+        var filter, table, tr, td, i;
+        if(filterType.target.name== 'filter-reset-button'){
+            table = document.getElementById("defect-details-table");
+            tr = table.getElementsByTagName("tr");
+            
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "";
+            }
+            document.getElementById("priority-dropdown").setAttribute('class','btn');
+            document.getElementById("category-dropdown").setAttribute('class','btn');
+            document.getElementById("filter-reset-button").setAttribute('class','btn active');
 
+        }
+        else if(filterType.target.name == 'priority-dropdown'){
+            filter = filterType.target.value;
 
-    // if(filterType === 'priorty'){
-    //     input = document.getElementById("priority-dropdown");
-    //     filter = input.value;
-    //     console.log(filter);
-    // }
-    // else if(filterType=='category'){
+            table = document.getElementById("defect-details-table");
+            tr = table.getElementsByTagName("tr");
+            
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                if(filter == "All" || td[2].innerHTML == filter){
+                    tr[i].style.display = "";
+                }
+                else{
+                    tr[i].style.display = "none";
+                } 
+            }
+            document.getElementById("priority-dropdown").setAttribute('class','btn active');
+            document.getElementById("category-dropdown").setAttribute('class','btn');
+            document.getElementById("filter-reset-button").setAttribute('class','btn');
+        }
+        else if(filterType.target.name == 'category-dropdown'){
+            filter = filterType.target.value;
 
-    // }
-    // else{
+            table = document.getElementById("defect-details-table");
+            tr = table.getElementsByTagName("tr");
+            
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                if(filter == "All" || td[0].innerHTML == filter){
+                    tr[i].style.display = "";
+                }
+                else{
+                    tr[i].style.display = "none";
+                } 
+            }
+            document.getElementById("priority-dropdown").setAttribute('class','btn');
+            document.getElementById("category-dropdown").setAttribute('class','btn  active');
+            document.getElementById("filter-reset-button").setAttribute('class','btn');
+        }
 
-    // }
+    }
     
-    // 
-    // 
-    // table = document.getElementById("myTable");
-    // tr = table.getElementsByTagName("tr");
-  
-    // // Loop through all table rows, and hide those who don't match the search query
-    // for (i = 0; i < tr.length; i++) {
-    //   td = tr[i].getElementsByTagName("td")[0];
-    //   if (td) {
-    //     txtValue = td.textContent || td.innerText;
-    //     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-    //       tr[i].style.display = "";
-    //     } else {
-    //       tr[i].style.display = "none";
-    //     }
-    //   }
-    // }
-    // alert(filterType);
-    // }
     render(){
         return(
             <>
                 <div id="defectFilterContainer" style={{textAlign:'center'}}>
                     <h2>Filter Details</h2>
-                    <button className="btn active" > Show all</button>
+                    <button className="btn active" name="filter-reset-button" id="filter-reset-button" onClick={this.filterTableHandler}> Show all</button>
 
                     <label htmlFor="priority-dropdown">Filter By Priority:</label>
 
-                    <select className="btn" name="priority-dropdown" id="priority-dropdown" >
+                    <select className="btn" name="priority-dropdown" id="priority-dropdown" onChange={this.filterTableHandler}>
                         <option>All</option>
                         <option>1</option>
                         <option>2</option>
+                        <option>3</option>
                     </select>
 
                     <label htmlFor="category-dropdown">Filter By Category:</label>
-                    <select className="btn" name="category-dropdown" id="category-dropdown" >
+                    <select className="btn" name="category-dropdown" id="category-dropdown" onChange={this.filterTableHandler}>
                         <option>All</option>
                         <option>UI</option>
                         <option>Functional</option>
-                        <option>Change Request</option>
+                        <option>ChangeRequest</option>
                     </select>
                 </div>
             </>

@@ -94,10 +94,19 @@ table{
 /* Add a grey background color on mouse-over */
 .btn:hover {
   background-color: #ddd;
+  color: black;
+
 }
 
-/* Add a dark background color to the active button */
-.btn.active {
+
+.btn {
   background-color: #666;
-   color: white;
+  color: white;
+  margin: 20px;
+}
+
+
+.btn.active {
+  background-color: #4CAF50;
+  color: white;
 }
