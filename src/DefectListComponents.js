@@ -3,49 +3,58 @@ import './DefectListComponent.css'
 
 class DefectListComponent extends React.Component{
     render(){
+        var defects = 
+        [
+            { id:101,category: "UI", description: 'Submit Button coming to the extreme left.Refer the screenshots ', priority: 2, status:"open", changeStatus:"CloseDefect"},
+            // { id:102,category: "Functional", description: 'While submitting the form data. a confirmation popup should appear. Refer the SRS document.', priority:1, status:"open", changeStatus:"CloseDefect"},
+            { id:103,category: "ChangeRequest", description: 'Add remove user functionality',priority:3, status:"closed", changeStatus:"No Action Pending"},
+            { id:104,category: "ChangeRequest", description: 'Add remove user functionality',priority:3, status:"closed", changeStatus:"No Action Pending"},
+            { id:105,category: "ChangeRequest", description: 'Add remove user functionality',priority:3, status:"closed", changeStatus:"No Action Pending"}
+          ]
+        //   []
         return(
             <>
                 <DefectTrackerNavBarComponent />
                 <DefectFilterComponent />
-                <DefectDetailsComponent />
+                <DefectDetailsComponent defects={defects}/>
             </>
         )
     }
 }
 
-function DefectDetailsComponent(){ 
-        var defects = [
-            { id:101,category: "UI", description: 'Submit Button coming to the extreme left.Refer the screenshots ', priority: 2, status:"open", changeStatus:"CloseDefect"},
-            { id:102,category: "Functional", description: 'While submitting the form data. a confirmation popup should appear. Refer the SRS document.', priority:1, status:"open", changeStatus:"CloseDefect"},
-            { id:103,category: "ChangeRequest", description: 'Add remove user functionality',priority:3, status:"closed", changeStatus:"No Action Pending"},
-            { id:104,category: "ChangeRequest", description: 'Add remove user functionality',priority:3, status:"closed", changeStatus:"No Action Pending"},
-            { id:105,category: "ChangeRequest", description: 'Add remove user functionality',priority:3, status:"closed", changeStatus:"No Action Pending"}
-          ]
-        return(
-            <>
-                <h1 style={{textAlign:'center'}}>Defect Details</h1>
-                <h3 style={{textAlign:'center'}}>Search Results: {defects.length}</h3>
-                <table style={{tableLayout:'auto'}} id="defect-details-table">
-                    <thead>
-                        <tr>
-                            <th>Defect Category</th>
-                            <th>Description</th>
-                            <th>Priority</th>
-                            <th>Status</th>
-                            <th>ChangeStatus</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {defects.map(defect => {
-                        return(  
-                            <Defect id={defect.id} description={defect.description} category={defect.category} priority={defect.priority} status={defect.status} changeStatus={defect.changeStatus}/>
-                        )
-                    })}
-                        
-                    </tbody>
-                </table>
-            </>
-        )
+class DefectDetailsComponent extends React.Component{ 
+        render(){
+            if(this.props.defects.length == "0"){
+                return(<h3 style={{textAlign:'center'}}>No Results to be displayed </h3>)
+            }
+            else{
+                return(
+                    <>
+                        <h1 style={{textAlign:'center'}}>Defect Details</h1>
+                        <h3 style={{textAlign:'center'}}>Search Results: {this.props.defects.length}</h3>
+                        <table style={{tableLayout:'auto'}} id="defect-details-table">
+                            <thead>
+                                <tr>
+                                    <th>Defect Category</th>
+                                    <th>Description</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>ChangeStatus</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {this.props.defects.map(defect => {
+                                return(  
+                                    <Defect id={defect.id} description={defect.description} category={defect.category} priority={defect.priority} status={defect.status} changeStatus={defect.changeStatus}/>
+                                )
+                            })}
+                                
+                            </tbody>
+                        </table>
+                    </>
+                )
+            }
+        }
 }
 
 function DefectTrackerNavBarComponent (){
