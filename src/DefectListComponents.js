@@ -1,22 +1,21 @@
 import React from 'react'
+import axios from 'axios'
+
 import './DefectListComponent.css'
 
 class DefectListComponent extends React.Component{
+    state={defects:[]}
+    componentDidMount(){
+        axios.get('defectsData.json').then(response=>{
+            this.setState({defects:response.data})
+        })
+    }
     render(){
-        var defects = 
-        [
-            { id:101,category: "UI", description: 'Submit Button coming to the extreme left.Refer the screenshots ', priority: 2, status:"open", changeStatus:"CloseDefect"},
-            // { id:102,category: "Functional", description: 'While submitting the form data. a confirmation popup should appear. Refer the SRS document.', priority:1, status:"open", changeStatus:"CloseDefect"},
-            { id:103,category: "ChangeRequest", description: 'Add remove user functionality',priority:3, status:"closed", changeStatus:"No Action Pending"},
-            { id:104,category: "ChangeRequest", description: 'Add remove user functionality',priority:3, status:"closed", changeStatus:"No Action Pending"},
-            { id:105,category: "ChangeRequest", description: 'Add remove user functionality',priority:3, status:"closed", changeStatus:"No Action Pending"}
-          ]
-        //   []
         return(
             <>
                 <DefectTrackerNavBarComponent />
                 <DefectFilterComponent />
-                <DefectDetailsComponent defects={defects}/>
+                <DefectDetailsComponent defects={this.state.defects}/>
             </>
         )
     }
