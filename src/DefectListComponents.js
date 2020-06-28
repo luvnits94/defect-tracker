@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
+
 import './DefectListComponent.css'
 
 class DefectListComponent extends React.Component{
@@ -13,7 +14,6 @@ class DefectListComponent extends React.Component{
     render(){
         return(
             <>
-                <DefectTrackerNavBarComponent />
                 <DefectFilterComponent />
                 <DefectDetailsComponent defects={this.state.defects}/>
             </>
@@ -56,34 +56,7 @@ class DefectDetailsComponent extends React.Component{
         }
 }
 
-function DefectTrackerNavBarComponent (){
-    return(
-            <>
-                <div className="topnav">
 
-                    {/* Centered link */}
-                    <div className="topnav-centered">
-                        <span id="topnav-text">Defect Tracker</span>
-                    </div>
-
-
-                    {/* Right Aligned links */}
-                    <div className="topnav-right">
-                        <a href="#">Contact</a>
-                        <a href="#">About Us</a>
-                        <a href="#">Logout</a>
-                    </div>
-
-                    <a href="#" className="active">Home</a>
-                    <a href="#">Add Defects</a>
-                    <a href="#">View Defects</a>
-                    
-                    
-                    
-                </div>
-            </>
-    )
-}
 
 class DefectFilterComponent extends React.Component{
     state={category:"All", priorty:"All"}

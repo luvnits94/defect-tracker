@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-import DefectListComponent from './DefectListComponents';
+import DefectTrackerRouter from './DefectTrackerRouter';
 
 ReactDOM.render(
   <React.StrictMode>
-    <DefectListComponent />
+    <DefectTrackerRouter />
   </React.StrictMode>,
   document.getElementById('root')
 );
