@@ -6,9 +6,22 @@ import Contact from './Components/Contact'
 import Home from './Components/Home'
 import Logout from './Components/Logout'
 import About from './Components/About'
+import AddDefect from './Components/AddDefect'
+import axios from 'axios'
 
 
 export default class DefectTrackerRouter extends React.Component{
+    state={defects:[]}
+    componentDidMount(){
+        axios.get('defectsData.json').then(response=>{
+            this.setState({defects:response.data})
+        })
+    }
+
+    // todo -- pass form data to ui instead of static data
+    addDefectHandler=()=>{
+        this.setState({defects:[...this.state.defects,{ "id":102,"category": "Functional", "description": "While submitting the form data. a confirmation popup should appear. Refer the SRS document.", "priority":1, "status":"open", "changeStatus":"CloseDefect"}]});
+    }
     render(){
         return(
                 <>
@@ -32,8 +45,8 @@ export default class DefectTrackerRouter extends React.Component{
 
                         </div>
                             <Route path="/home" component={Home}></Route>
-                            <Route path="/viewdefects" component={DefectListComponent}></Route>
-                            <Route path="/adddefect" component={TBD}></Route>
+                            <Route path="/viewdefects" component={()=><DefectListComponent defects={this.state.defects} />}></Route>
+                            <Route path="/adddefect" component={()=><AddDefect addDefectHandler={this.addDefectHandler} />}></Route>
                             <Route path="/logout" component={Logout}></Route>
                             <Route path="/contact" component={Contact}></Route>
                             <Route path="/about" component={About}></Route>

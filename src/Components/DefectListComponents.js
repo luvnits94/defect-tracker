@@ -1,21 +1,16 @@
 import React from 'react'
-import axios from 'axios'
+
 
 
 import '../DefectListComponent.css'
 
 class DefectListComponent extends React.Component{
-    state={defects:[]}
-    componentDidMount(){
-        axios.get('defectsData.json').then(response=>{
-            this.setState({defects:response.data})
-        })
-    }
+    
     render(){
         return(
             <>
                 <DefectFilterComponent />
-                <DefectDetailsComponent defects={this.state.defects}/>
+                <DefectDetailsComponent defects={this.props.defects}/>
             </>
         )
     }
