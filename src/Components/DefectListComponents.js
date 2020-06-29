@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 
-import './DefectListComponent.css'
+import '../DefectListComponent.css'
 
 class DefectListComponent extends React.Component{
     state={defects:[]}

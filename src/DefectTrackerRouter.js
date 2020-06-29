@@ -1,11 +1,11 @@
 import React from 'react'
 import {BrowserRouter as Router,Route,Link,NavLink} from 'react-router-dom'
-import DefectListComponent from './DefectListComponents'
-import TBD from './TBD'
-import Contact from './Contact'
-import Home from './Home'
-import Logout from './Logout'
-import About from './About'
+import DefectListComponent from './Components/DefectListComponents'
+import TBD from './Components/TBD'
+import Contact from './Components/Contact'
+import Home from './Components/Home'
+import Logout from './Components/Logout'
+import About from './Components/About'
 
 
 export default class DefectTrackerRouter extends React.Component{
