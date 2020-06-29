@@ -11,7 +11,7 @@ import axios from 'axios'
 
 
 export default class DefectTrackerRouter extends React.Component{
-    state={defects:[]}
+    state={defects:[],nextDefectId:null}
     componentDidMount(){
         axios.get('defectsData.json').then(response=>{
             this.setState({defects:response.data})
@@ -19,8 +19,9 @@ export default class DefectTrackerRouter extends React.Component{
     }
 
     // todo -- pass form data to ui instead of static data
-    addDefectHandler=()=>{
-        this.setState({defects:[...this.state.defects,{ "id":102,"category": "Functional", "description": "While submitting the form data. a confirmation popup should appear. Refer the SRS document.", "priority":1, "status":"open", "changeStatus":"CloseDefect"}]});
+    addDefectHandler=(defect)=>{
+        this.setState({nextDefectId:this.state.defects[this.state.defects.length-1].id})
+        this.setState({defects:[...this.state.defects,{ "id":this.state.nextDefectId,"category": defect.category, "description": defect.description, "priority":defect.priority, "status":"open", "changeStatus":"CloseDefect"}]});
     }
     render(){
         return(
