@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import DefectTrackerRouter from './DefectTrackerRouter';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <DefectTrackerRouter />
   </React.StrictMode>,
   document.getElementById('root')
 );
