@@ -13,8 +13,15 @@ import axios from 'axios'
 export default class DefectTrackerRouter extends React.Component{
     state={defects:[],nextDefectId:null}
     componentDidMount(){
-        axios.get('defectsData.json').then(response=>{
+        axios.get('http://localhost:9000/getalldefects').then(response=>{
             this.setState({defects:response.data})
+            // console.log(response.data);
+            // console.log(response.status);
+            // console.log(response.statusText);
+            // console.log(response.headers);
+            // console.log(response.config);
+        },(error)=>{
+            console.log('Some Error' + error);
         })
     }
 
