@@ -36,3 +36,32 @@ exports.newDefect = async (req, res) => {
     }
   };
 
+exports.closeDefect = async(req,res) =>{
+    try {
+      const defectObj = {
+        status: "Closed",
+      };
+      const updatedDefect = await defectModel.findOneAndUpdate(
+        {id: req.body.id},
+        defectObj,{
+          new: true,
+          runValidators: true
+        }
+      );
+      if(updatedDefect!= null){
+        console.log(updatedDefect);
+      }
+      res.status(200).json(
+        updatedDefect
+      );
+    } catch (err) {
+      console.log(err);
+      const errorObj = {
+        status:"fail",
+        message:err
+      }
+      res.status(404).json(
+        errorObj
+      );
+    }
+};
