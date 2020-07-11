@@ -2,6 +2,7 @@ var express = require('express')
 const bodyparser = require('body-parser');
 var defectTrackerRouter = require('./routes/route')
 var cors = require('cors')
+const defectTrackerController = require('./controller/defectTrackerController')
 
 const app = express();
 
@@ -9,6 +10,7 @@ const app = express();
 // To do -- Enable CORS for Specific Routes
 app.use(cors())
 app.use(bodyparser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));// support encoded bodies
 app.use('/', defectTrackerRouter);
 
 const port = process.env.PORT || 9000;

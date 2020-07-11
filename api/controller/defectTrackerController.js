@@ -1,13 +1,38 @@
+const defectModel = require('../models/defectSchema');
+
 exports.getAllDefects = async (req,res)=>{
-    //To do connect to db and fetch all defects
-    //Currently using static data
-    res.status(200).json(
-        [
-            { id:101,category: "UI", description: "Submit Button coming to the extreme left.Refer the screenshots ", "priority": 2, status:"open", changeStatus:"CloseDefect"},
-            { id:102,category: "Functional", description: "While submitting the form data. a confirmation popup should appear. Refer the SRS document.", priority:1, status:"open", changeStatus:"CloseDefect"},
-            { id:103,category: "ChangeRequest", description: "Add remove user functionality",priority:3, status:"closed", changeStatus:"No Action Pending"},
-            { id:104,category: "ChangeRequest", description: "Add remove user functionality",priority:3, status:"closed", changeStatus:"No Action Pending"},
-            { id:105,category: "ChangeRequest", description: "Add remove user functionality",priority:3, status:"closed", changeStatus:"No Action Pending"}
-        ]
-    )
+    try {
+      const defectArray = await defectModel.find({});
+      res.status(200).json(defectArray)
+      
+    } catch (error) {
+      console.log(error)
+    }
+    
 };
+
+exports.newDefect = async (req, res) => {
+    try {
+      const defectObj = {
+        id: Math.round(Math.random()*100000,5),
+        priority: req.body.priority,
+        category: req.body.category,
+        description: req.body.description,
+      };
+      const newDefect = await defectModel.create(defectObj);
+      console.log(newDefect);
+      res.status(200).json(
+        newDefect
+      );
+    } catch (err) {
+      console.log(err);
+      const errorObj = {
+        status:"fail",
+        message:err
+      }
+      res.status(404).json(
+        errorObj
+      );
+    }
+  };
+

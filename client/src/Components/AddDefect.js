@@ -1,14 +1,18 @@
 import React from 'react'
 import { withRouter } from "react-router";
+import axios from 'axios'
 
 class AddDefect extends React.Component{
-    state={category: "cc", description: "", priority: ""}
+    state={category: "", description: "", priority: ""}
     setDefectState=(e)=>{
         this.setState({[e.target.name]:e.target.value})
     }
+
+    // Todo -- Try Catch Block -- HandleErrors
     addDefectHandler=(e)=>{
-        
-        this.props.addDefectHandler(this.state);
+        axios.post('http://localhost:9000/newDefect',this.state).then(response=>{
+                this.props.addDefectHandler(response.data);
+            });
         this.props.history.push('/viewdefects');
     }
     render(){
@@ -33,7 +37,6 @@ class AddDefect extends React.Component{
                         <textarea name="description" style={{display:"block"}} onChange={this.setDefectState}></textarea>
                     </div>
 
-                    {/* Todo -- push form data in UI instead of hardcoded data */}
                     <button onClick={this.addDefectHandler}>Add Defect</button>
                 </form>
             </>
